@@ -3,7 +3,12 @@
 > ### 由于近端时间打算找工作，就打算整理一份php的考察点，以及经常问道的面试点
 # 
 
->  get与post的区别
+1. [get与post区别](#get与post的区别)
+2. [session的定义,什么是session](#session的定义-什么是session)
+3. [session 和 cookie 的区别](#session和cookie的区别)
+4. [php-魔术方法](#php-魔术方法)
+
+>  ### get与post的区别
 
 1. POST数据会被重复提交（浏览器应该告知用户数据会被重新提交）
 2. GET能被缓存，POST不能缓存 
@@ -21,17 +26,33 @@
 5. 还是举一个通俗栗子吧，在微博这个场景里，GET的语义会被用在「看看我的Timeline上最新的20条微博」这样的场景，而POST的语义会被用在「发微博、评论、点赞」这样的场景中
 
 
-> session的定义 (什么是session)
+> ### session的定义-什么是session
 1. 由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session
 2. Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；
 3. Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
 4. 如果用户禁用了cookie的话可以通过重写url的技术来实现传递session
 
-> session 和 cookie 的区别
+> ### session和cookie的区别
 1. session 是一个抽象的概念，而cookie是真实存在的,http协议中定义再header中的字段，
 2. session存储再服务端，cookie存储在客户端，
 3. session的运行依赖于session_id, 而session_id存储在cookie当中，如果浏览器禁用了cookie的话，session就会随之失效，（但是我们可以通过重写url的方式实现）
 
+> ### php-魔术方法
+1. __construct()，构造函数
+2. __destruct()，析构函数
+3. __call(), 在对象中调用一个不可访问方法时，__call() 会被调用。
+4. __callStatic(), 在静态上下文中调用一个不可访问方法时，__callStatic() 会被调用。
+5. __get(), 读取不可访问属性的值时，__get() 会被调用。
+6. __set(), 在给不可访问属性赋值时，__set() 会被调用
+7. __isset(), 当对不可访问属性调用 isset() 或 empty() 时，__isset() 会被调用。
+8. __unset(), 当对不可访问属性调用 unset() 时，__unset() 会被调用。
+9. __sleep(), serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作，返回需要序列化的数组
+10. __wakeup(), unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法
+11. __toString(), 方法用于一个类被当成字符串时应怎样回应。例如 echo $obj; 应该显示些什么。此方法必须返回一个字符串
+12. __invoke(), 当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用。
+13. __clone(), 当复制完成时，如果定义了 __clone() 方法，则新创建的对象（复制生成的对象）中的 __clone() 方法会被调用，可用于修改属性的值（如果有必要的话）。
+14. __debugInfo()，再var_dump时会调用
+15. __set_state()， 看不懂，面试的时候尽量避开这个魔术方法 当调用 var_export() 导出类时，此静态 方法会被调用。本方法的唯一参数是一个数组，其中包含按 array('property' => value, ...) 格式排列的类属性
 
 
 
